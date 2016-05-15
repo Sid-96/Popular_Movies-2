@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.android.popularmovies.MainActivity">
+        <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/sort_rating"
+                    android:title="By Rating"/>
+                <item
+                    android:id="@+id/sort_popularity"
+                    android:title="By Popularity"
+                    android:checked="true"/>
+                <item
+                    android:id="@+id/sort_revenue"
+                    android:title="By Revenue"/>
+                <item
+                    android:id="@+id/sort_now_playing"
+                    android:title="Now Playing "/>
+                <item
+                    android:id="@+id/sort_favourite"
+                    android:title="Favourites"/>
+
+
+        </group>
+</menu>
