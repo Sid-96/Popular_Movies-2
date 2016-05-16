@@ -18,7 +18,7 @@ android {
         }
     }
     buildTypes.each {
-        it.buildConfigField 'String', 'API', "\"Your Api here\""
+        it.buildConfigField 'String', 'API', "\"Your API key here\""
     }
 }
 

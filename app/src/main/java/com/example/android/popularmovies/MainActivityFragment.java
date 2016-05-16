@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -32,13 +33,14 @@ public class MainActivityFragment extends Fragment {
 
     private static final String TAG = MainActivityFragment.class.getSimpleName();
     public View mainFragmentView;
+    public TextView emptyView;
     private GridView mGridView;
     private RequestQueue mRequestQueue;
     private boolean isDualPane = false;
     private MovieAdapter mMovieAdapter;
     private ArrayList<Movies> mMoviesData;
     public static MainActivityFragment instance;
-    public static String sort_order = "popularity.desc", moreParams = "";
+    public static String sort_order = "popular", moreParams = "";
     public static boolean cached = false;
     public int gridPos = -1;
 
@@ -52,7 +54,10 @@ public class MainActivityFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         mainFragmentView = rootView;
+        emptyView = new TextView(getContext());
+        emptyView.setText("Images Loading");
         mGridView = (GridView) rootView.findViewById(R.id.movies_grid);
+        mGridView.setEmptyView(emptyView);
         mMoviesData = new ArrayList<Movies>();
         mRequestQueue = Volley.newRequestQueue(getContext());
         mMovieAdapter = new MovieAdapter(getContext());
@@ -118,15 +123,15 @@ public class MainActivityFragment extends Fragment {
         mMovieAdapter.clearMovies();
         this.cached = cache;
         if(!cached)
-            getMovies(sort_order,moreParams);
+            getMovies(sort_order);
         else
             getFavorites();
     }
 
-    private void getMovies(String sort_order, final String moreParams) {
-        String urlString = "http://api.themoviedb.org/3/discover/movie?sort_by=" + sort_order + "&" + moreParams
-                + "&api_key=" + BuildConfig.API;
-        String urlString1 = "http://api.themoviedb.org/3/movie/now_playing?api_key=" + BuildConfig.API;
+    private void getMovies(String sort_order) {
+        /*String urlString = "http://api.themoviedb.org/3/movie?sort_by=" + sort_order + "&" + moreParams
+                + "&api_key=" + BuildConfig.API;*/
+        String urlString1 = "http://api.themoviedb.org/3/movie/" + sort_order + "?api_key=" + BuildConfig.API;
 
         if(sort_order.equals("now_playing")){
             JsonObjectRequest req = new JsonObjectRequest(urlString1, null, new Response.Listener<JSONObject>() {
@@ -173,7 +178,7 @@ public class MainActivityFragment extends Fragment {
             mRequestQueue.add(req);
         }
         else {
-            JsonObjectRequest req = new JsonObjectRequest(urlString, null, new Response.Listener<JSONObject>() {
+            JsonObjectRequest req = new JsonObjectRequest(urlString1, null, new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {

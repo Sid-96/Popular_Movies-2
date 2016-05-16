@@ -4,12 +4,12 @@ import android.net.Uri;
 import android.provider.BaseColumns;
 
 
-public class MovieContract {
+public final class MovieContract {
 
     public static final String AUTHORITY = "com.example.android.popularmovies";
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
 
-    public MovieContract(){
+    private MovieContract(){
 
     }
     public static final class MovieEntry implements BaseColumns {

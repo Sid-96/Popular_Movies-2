@@ -34,15 +34,11 @@ public class MainActivity extends AppCompatActivity {
         MainActivityFragment fragment = MainActivityFragment.instance;
 
         if (id == R.id.sort_rating) {
-            MainActivityFragment.sort_order = "vote_average.desc";
-            MainActivityFragment.moreParams = "vote_count.gte=50&include_video=false";
+            MainActivityFragment.sort_order = "top_rated";
+            //MainActivityFragment.moreParams = "vote_count.gte=50&include_video=false";
         }
         else if (id == R.id.sort_popularity) {
-            MainActivityFragment.sort_order = "popularity.desc";
-            MainActivityFragment.moreParams = "";
-        }
-        else if (id == R.id.sort_revenue) {
-            MainActivityFragment.sort_order = "revenue.desc";
+            MainActivityFragment.sort_order = "popular";
             MainActivityFragment.moreParams = "";
         }
         else if (id == R.id.sort_now_playing) {
@@ -53,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         item.setChecked(true);
-        if (id == R.id.sort_popularity || id == R.id.sort_rating || id == R.id.sort_revenue || id == R.id.sort_now_playing){
+        if (id == R.id.sort_popularity || id == R.id.sort_rating || id == R.id.sort_now_playing){
             fragment.updateUI(false);
             activeId = id;
         } else if (id == R.id.sort_favourite){
