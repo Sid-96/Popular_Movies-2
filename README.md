@@ -1,2 +1,2 @@
 # Popular_Movies
-Please enter API key in MainActivity Fragment Class in static variable API_KEY.
+Please enter API key in build.gradle(app) in place of string "YOUR API KEY HERE"
